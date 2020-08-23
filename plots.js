@@ -57,8 +57,8 @@ function buildCharts(sample){
 function buildbarchart(data){
   var bardata = [{
    type:"bar" ,
-   x: data.sample_values.slice(0,10),
-   y: data.otu_ids.slice(0,10).map(OTU => "OTU " + OTU),
+   x: data.sample_values.slice(0,10).reverse(),
+   y: data.otu_ids.map(OTU => "OTU " + OTU).reverse(),
    text: data.otu_labels.slice(0,10),
    orientation:"h"
   }  ];
@@ -74,8 +74,8 @@ function getColor(val, min, max) {
   	return `hsl(${hue}%, 100%, 50%)`;
 }
 function getSize(val, min, max) {
-	let minimumSize = 10,
-        maximumSize = 100,
+	let minimumSize = 20,
+        maximumSize = 150,
         sizeRange = maximumSize - minimumSize,
     	  range = max - min,
         value = val - min,
