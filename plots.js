@@ -36,6 +36,7 @@ function buildMetadata(sample) {
     PANEL.append("h6").text("BBTYPE : " + result.bbtype);
     PANEL.append("h6").text("WFREQ : " + result.wfreq);
     
+    buildgauge(result.wfreq);
   });
 }
 
@@ -47,7 +48,7 @@ function buildCharts(sample){
 
     buildbarchart(result);
     buildbubblechart(result);
-
+ 
 
 
   });
@@ -102,8 +103,53 @@ function buildbubblechart(data){
     }
   }];
   Plotly.newPlot("bubble" , bubbledata);
+}
+  
+function buildgauge(data){
+  var gaugedata = [{
+      type: "indicator",
+      mode: "gauge+number",
+      value: data,
+      title: { text: "Belly Button Washing Frequency", font: { size: 24 } },
+      delta: { reference: 2, increasing: { color: "maroon" } },
+      gauge: {
+        axis: { range: [0, 10], tickwidth: 1, tickcolor: "darkblue" },
+        bar: { color: "darkblue" },
+        bgcolor: "white",
+        borderwidth: 2,
+        bordercolor: "gray",
+        steps: [
+          { range: [0, 1], color: "cyan" },
+          { range: [1, 2], color: "royalblue" },
+          { range: [2, 3], color: "lemonchiffon" },
+          { range: [3, 4], color: "coral" },
+          { range: [4, 5], color: "darkturquoise" },
+          { range: [5, 6], color: "silver" },
+          { range: [6, 7], color: "fuschia" },
+          { range: [7, 8], color: "crimson" },
+          { range: [8, 9], color: "honeydew" },
+          { range: [9, 10], color: "limegreen" }
+        ],
+        threshold: {
+          line: { color: "black", width: 8 },
+          thickness: 1.75,
+          value: 10
+        }
+      }
+    }
+  ]
 
+  var layout = {
+    width: 500,
+    height: 400,
+    margin: { t: 25, r: 25, l: 25, b: 25 },
+    paper_bgcolor: "lavender",
+    font: { color: "darkblue", family: "Arial" }
+  };
+  
+  Plotly.newPlot("gauge", gaugedata, layout);
+}
   
 
-}  
+
 init();
